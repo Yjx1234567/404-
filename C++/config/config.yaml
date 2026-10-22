@@ -1,0 +1,28 @@
+server:
+  host: 0.0.0.0
+  port: 8080
+  thread_pool_size: 4
+  public_dir: "./public"
+
+database:
+  host: localhost
+  port: 3306
+  username: "your_username"
+  password: ""
+  database: oj_system
+  max_connections: 10
+
+execution:
+  timeout_seconds: 5
+  max_memory_mb: 256
+  compile_command: "g++ -std=c++17 -O2"
+  temp_dir: "/tmp/oj_temp"
+  compile_timeout_seconds: 15   # 编译超时（防编译炸弹）
+  judge_workers: 2              # 异步判题队列工作线程数
+  rate_limit_per_minute: 10     # 每用户每分钟最大提交次数，0 = 不限制
+  judge_user: "nobody"          # 判题子进程降权目标用户（root 运行时生效；留空则不降权）
+
+logging:
+  level: INFO
+  file: "server.log"
+  console: true
