@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="在 CodeOJ 练习 C++ 编程：浏览分级题库，在线编写代码，查看评测结果与自己的提交记录。">
+    <title>CodeOJ - 让每一次编程练习都有收获</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <a href="index.html" class="logo" aria-label="CodeOJ 首页">
+                <span class="logo-text">CodeOJ</span>
+            </a>
+            <nav class="landing-nav" aria-label="首页导航">
+                <a href="#features">平台能力</a>
+                <a href="#about">关于 CodeOJ</a>
+                <a href="login.html" class="btn-login">登录</a>
+                <a href="register.html" class="btn-register">开始练习</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero" aria-labelledby="heroTitle">
+                <div class="hero-content">
+                    <p class="hero-kicker">C++ 在线评测平台</p>
+                    <h1 id="heroTitle" class="hero-title">把每一次练习，<br>变成真正的进步。</h1>
+                    <p class="hero-subtitle">从读懂题目到写出答案，在浏览器里完成 C++ 练习。查看每次提交的评测结果，积累自己的解题记录。</p>
+                    <div class="hero-buttons">
+                        <a href="register.html" class="btn-primary">注册并开始练习</a>
+                        <a href="login.html" class="btn-secondary">已有账号，去登录</a>
+                    </div>
+                    <p class="hero-note">分级题库 · 在线编辑 · 提交评测 · 个人统计</p>
+                </div>
+                <div class="hero-visual" aria-label="C++ 两数求和代码示例">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <span class="filename">main.cpp</span>
+                            <span class="code-language">C++</span>
+                        </div>
+                        <pre class="code-body"><code><span class="kw">#include</span> <span class="str">&lt;iostream&gt;</span>
+
+<span class="type">int</span> <span class="fn">main</span>() {
+    <span class="type">int</span> a, b;
+    std::cin &gt;&gt; a &gt;&gt; b;
+    std::cout &lt;&lt; a + b &lt;&lt; <span class="str">'\n'</span>;
+    <span class="kw">return</span> 0;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="features" aria-labelledby="featuresTitle">
+                <div class="section-heading">
+                    <p class="eyebrow">围绕每一次练习</p>
+                    <h2 id="featuresTitle">让思考、编写与复盘连在一起</h2>
+                    <p>把注意力留给题目与代码，让练习过程更清楚。</p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <p class="feature-number" aria-hidden="true">01</p>
+                        <h3>找到适合的题目</h3>
+                        <p>按简单、中等、困难筛选题目，也可以通过标题搜索，安排自己的练习节奏。</p>
+                    </article>
+                    <article class="feature-card">
+                        <p class="feature-number" aria-hidden="true">02</p>
+                        <h3>专注编写代码</h3>
+                        <p>在线编辑器支持 C++ 语法高亮，按题目自动保存代码草稿，便于继续练习。</p>
+                    </article>
+                    <article class="feature-card">
+                        <p class="feature-number" aria-hidden="true">03</p>
+                        <h3>读懂评测反馈</h3>
+                        <p>提交后查看评测状态与用例结果，通过编译错误、运行反馈定位需要调整的地方。</p>
+                    </article>
+                    <article class="feature-card">
+                        <p class="feature-number" aria-hidden="true">04</p>
+                        <h3>回顾练习过程</h3>
+                        <p>查看历史提交与代码，在个人中心了解通过题目数、提交次数与难度分布。</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="about" class="about-section" aria-labelledby="aboutTitle">
+                <div class="about-content">
+                    <div class="about-copy">
+                        <p class="eyebrow">关于 CodeOJ</p>
+                        <h2 id="aboutTitle">从一道题开始，把基础练扎实。</h2>
+                        <p>CodeOJ 是一个面向 C++ 编程练习的在线评测平台。你可以阅读题目、编写代码、提交评测，再通过记录回顾自己的解题过程。</p>
+                    </div>
+                    <a href="register.html" class="btn-primary">开始我的第一道题</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="landing-footer">
+            <p>CodeOJ · C++ 在线评测平台</p>
+            <a href="#features">了解平台能力</a>
+        </footer>
+    </div>
+</body>
+</html>

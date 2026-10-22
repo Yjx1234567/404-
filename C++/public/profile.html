@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - CodeOJ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">CodeOJ</span>
+                </a>
+                <nav class="app-nav" aria-label="主要导航">
+                    <a href="problem_list.html" class="nav-link">题库</a>
+                    <a href="submissions.html" class="nav-link">提交记录</a>
+                    <a href="leaderboard.html" class="nav-link">排行榜</a>
+                    <a href="profile.html" class="nav-link" aria-current="page">个人中心</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <span id="userInfo" class="user-info"></span>
+                <a href="admin.html" id="adminLink" class="admin-link hidden">管理后台</a>
+                <button id="logoutBtn" class="btn-logout" type="button">退出</button>
+            </div>
+        </header>
+
+        <main id="mainContent" tabindex="-1" class="main-content profile-layout">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar">?</div>
+                <div>
+                    <p class="eyebrow">MY PROFILE</p>
+                    <h1 id="profileUsername">加载中...</h1>
+                    <p class="profile-subtitle" id="profileRole"></p>
+                </div>
+            </div>
+
+            <div class="stats-grid" role="group" aria-label="个人练习统计">
+                <div class="stat-card">
+                    <div class="stat-value" id="statSolved">-</div>
+                    <div class="stat-label">通过题目</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statAttempted">-</div>
+                    <div class="stat-label">尝试题目</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statSubmissions">-</div>
+                    <div class="stat-label">提交次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statRate">-</div>
+                    <div class="stat-label">通过率</div>
+                </div>
+            </div>
+
+            <div class="profile-panels">
+                <section class="profile-panel" aria-labelledby="difficultyHeading">
+                    <div class="section-heading">
+                        <h2 id="difficultyHeading">难度分布</h2>
+                        <p class="page-description">各难度题目的完成进度</p>
+                    </div>
+                    <div id="difficultyBars" class="difficulty-bars">
+                        <div class="loading">加载中...</div>
+                    </div>
+                </section>
+                <section class="profile-panel" aria-labelledby="recentHeading">
+                    <div class="section-heading">
+                        <h2 id="recentHeading">最近提交</h2>
+                        <a href="submissions.html" class="back-link">查看全部</a>
+                    </div>
+                    <div id="recentSubmissions" class="recent-submissions">
+                        <div class="loading">加载中...</div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - CodeOJ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="auth-container">
+        <section class="auth-intro" aria-labelledby="authIntroTitle">
+            <a href="index.html" class="logo" aria-label="CodeOJ 首页">
+                <span class="logo-text">CodeOJ</span>
+            </a>
+            <p class="eyebrow">继续你的 C++ 练习</p>
+            <h1 id="authIntroTitle">每一次思考，<br>都让答案更进一步。</h1>
+            <p>回到题目与代码之间，用一次次尝试积累解决问题的能力。</p>
+            <p class="auth-intro-note">在线编辑 · 提交评测 · 练习记录</p>
+        </section>
+        <section class="auth-card" aria-labelledby="loginTitle">
+            <div class="auth-header">
+                <p class="eyebrow">登录账号</p>
+                <h2 id="loginTitle">欢迎回来</h2>
+                <p>登录后继续练习，查看你的提交记录。</p>
+            </div>
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" placeholder="请输入用户名" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" placeholder="请输入密码" autocomplete="current-password" required>
+                </div>
+                <div id="loginError" class="error-message" role="alert" aria-live="polite"></div>
+                <button type="submit" class="btn-submit">登录并继续练习</button>
+            </form>
+            <div class="auth-footer">
+                <p>还没有账号？<a href="register.html">创建账号</a></p>
+                <a href="index.html" class="back-link">返回首页</a>
+            </div>
+        </section>
+    </main>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

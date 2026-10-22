@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排行榜 - CodeOJ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">CodeOJ</span>
+                </a>
+                <nav class="app-nav" aria-label="主要导航">
+                    <a href="problem_list.html" class="nav-link">题库</a>
+                    <a href="submissions.html" class="nav-link">提交记录</a>
+                    <a href="leaderboard.html" class="nav-link" aria-current="page">排行榜</a>
+                    <a href="profile.html" class="nav-link">个人中心</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <span id="userInfo" class="user-info"></span>
+                <a href="admin.html" id="adminLink" class="admin-link hidden">管理后台</a>
+                <button id="logoutBtn" class="btn-logout" type="button">退出</button>
+            </div>
+        </header>
+
+        <main id="mainContent" tabindex="-1" class="main-content">
+            <div class="page-heading">
+                <p class="eyebrow">LEADERBOARD</p>
+                <h1>排行榜</h1>
+                <p class="page-description leaderboard-subtitle">按通过题目数排名，并列时提交次数少者靠前，展示前 50 名。</p>
+            </div>
+            <div class="list-columns leaderboard-columns" aria-hidden="true">
+                <span>排名</span><span>用户</span><span>通过题目 / 提交次数</span>
+            </div>
+            <div id="leaderboardList" class="leaderboard-list">
+                <div class="loading">加载中...</div>
+            </div>
+        </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/leaderboard.js"></script>
+</body>
+</html>
