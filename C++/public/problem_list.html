@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>题目列表 - CodeOJ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">CodeOJ</span>
+                </a>
+                <nav class="app-nav" aria-label="主要导航">
+                    <a href="problem_list.html" class="nav-link" aria-current="page">题库</a>
+                    <a href="submissions.html" class="nav-link">提交记录</a>
+                    <a href="leaderboard.html" class="nav-link">排行榜</a>
+                    <a href="profile.html" class="nav-link">个人中心</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <span id="userInfo" class="user-info"></span>
+                <a href="admin.html" id="adminLink" class="admin-link hidden">管理后台</a>
+                <button id="logoutBtn" class="btn-logout" type="button">退出</button>
+            </div>
+        </header>
+        
+        <main id="mainContent" tabindex="-1" class="main-content">
+            <div class="page-heading">
+                <p class="eyebrow">PROBLEM SET</p>
+                <h1>题库</h1>
+                <p class="page-description">从一道题开始，在编写、提交与调试中积累解题经验。</p>
+            </div>
+            <div class="list-toolbar">
+                <div class="filter-bar">
+                    <label class="sr-only" for="searchInput">搜索题目标题</label>
+                    <input type="search" id="searchInput" class="search-input" placeholder="搜索题目标题">
+                    <div class="filter-group" role="group" aria-label="按难度筛选">
+                        <button class="filter-btn active" data-filter="all" type="button" aria-pressed="true">全部</button>
+                        <button class="filter-btn" data-filter="Easy" type="button" aria-pressed="false">简单</button>
+                        <button class="filter-btn" data-filter="Medium" type="button" aria-pressed="false">中等</button>
+                        <button class="filter-btn" data-filter="Hard" type="button" aria-pressed="false">困难</button>
+                    </div>
+                </div>
+            </div>
+            <div class="list-columns problem-columns" aria-hidden="true">
+                <span>编号</span><span>题目</span><span>难度</span><span>创建时间</span>
+            </div>
+            <div id="problemList" class="problem-list">
+                <div class="loading">加载中...</div>
+            </div>
+            <div id="pagination" class="pagination"></div>
+        </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/problem.js"></script>
+</body>
+</html>

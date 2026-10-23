@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OJ 平台运行指南（Windows 小白版）</title>
+<style>
+  body { font-family: "Microsoft YaHei", system-ui, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px 20px 60px; color: #2c3e50; line-height: 1.75; background: #fafaf8; }
+  h1 { font-size: 26px; border-bottom: 3px solid #2d6a4f; padding-bottom: 10px; }
+  h2 { font-size: 20px; color: #2d6a4f; margin-top: 40px; }
+  h3 { font-size: 16px; margin-top: 24px; }
+  .step-num { display: inline-block; background: #2d6a4f; color: #fff; width: 26px; height: 26px; border-radius: 50%; text-align: center; line-height: 26px; font-size: 15px; margin-right: 8px; }
+  .cmd { background: #1e1e1e; color: #e6e6e6; padding: 12px 16px; border-radius: 8px; font-family: Consolas, monospace; font-size: 14px; margin: 10px 0; overflow-x: auto; white-space: pre; }
+  .cmd .tip { color: #7ec8a9; }
+  .note { background: #fff8e6; border-left: 4px solid #e9a23b; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 14px 0; }
+  .warn { background: #fdecea; border-left: 4px solid #c0392b; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 14px 0; }
+  .ok { background: #e8f5ee; border-left: 4px solid #2d6a4f; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 14px 0; }
+  code { background: #eee; padding: 1px 6px; border-radius: 4px; font-family: Consolas, monospace; font-size: 13px; }
+  .faq-q { font-weight: bold; margin-top: 20px; color: #b3541e; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th, td { border: 1px solid #d5d8dc; padding: 8px 12px; text-align: left; font-size: 14px; }
+  th { background: #eaf0ed; }
+  .toc { background: #fff; border: 1px solid #d5d8dc; border-radius: 10px; padding: 16px 24px; margin: 20px 0; }
+  .toc a { color: #2d6a4f; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<h1>OJ 平台完整运行指南（Windows 小白版）</h1>
+
+<div class="warn">
+<b>⚠️ 必须是 Ubuntu 22.04，不能用 24.04</b><br>
+本项目用到的密码库 <code>Botan 2.x</code>，在 Ubuntu 24.04 的软件源里已经<b>被移除</b>了（只有 Botan 3.x，而 3.x 删掉了本项目调用的 <code>generate_bcrypt</code> / <code>check_bcrypt</code> 接口）。<br>
+Ubuntu <b>22.04 (jammy)</b> 里 <code>libbotan-2-dev</code> 是原生包，装完就能用。<br>
+<b>如果你之前已经装了 Ubuntu 24.04</b>：先双击 <code>0-uninstall-old-Ubuntu.bat</code> 删掉它，再从 ① 开始。
+</div>
+
+<div class="ok">
+<b>不会在终端里复制粘贴？用这个方案：</b><br>
+项目文件夹里已经放好了双击工具，全程<b>只需要鼠标双击</b>（窗口里的提示文字是英文的，避免中文乱码，跟着做即可）：<br>
+⓪ <code>0-uninstall-old-Ubuntu.bat</code> —— <b>（可选）</b>只在之前装错过 24.04 时才用，会删除整个旧 Linux 系统<br>
+① <code>1-双击安装WSL.bat</code> —— 装 <b>Ubuntu 22.04</b>。装好后按提示重启电脑，开始菜单打开 <b>Ubuntu-22.04</b> 设好用户名密码<br>
+② <code>2-双击部署OJ.bat</code> —— 首次部署（要输一次 WSL 密码，盲打）<br>
+③ <code>3-双击启动OJ服务.bat</code> —— 以后每次开机后启动服务用这个<br>
+依然卡住再回头看下面的手动教程。
+</div>
+
+<div class="toc">
+<b>目录</b><br>
+① 这个项目为什么需要 WSL &nbsp;|&nbsp; <a href="#part1">第一步：安装 WSL（只做一次）</a> &nbsp;|&nbsp; <a href="#part2">第二步：首次进入 Ubuntu</a> &nbsp;|&nbsp; <a href="#part3">第三步：一键部署</a> &nbsp;|&nbsp; <a href="#part4">第四步：使用系统</a> &nbsp;|&nbsp; <a href="#part5">以后如何再次启动</a> &nbsp;|&nbsp; <a href="#faq">常见问题</a>
+</div>
+
+<div class="note">
+<b>为什么需要 WSL？</b><br>
+这个 OJ 项目用了 Linux 专属技术（fork 进程隔离、rlimit 资源限制）来安全地运行学生提交的代码，<b>只能在 Linux 环境编译运行</b>。WSL 是 Windows 官方内置的"Linux 子系统"，装上它就能在 Windows 里运行 Linux 程序，浏览器照常用 Windows 的。
+</div>
+
+<h2 id="part1">第一步：安装 WSL（只需要做一次）</h2>
+
+<h3><span class="step-num">1</span>以管理员身份打开 PowerShell</h3>
+<ol>
+  <li>按键盘上的 <code>Win</code> 键（就是田字徽标键）</li>
+  <li>输入 <code>powershell</code></li>
+  <li>右键点击搜索结果里的 <b>「Windows PowerShell」</b>，选 <b>「以管理员身份运行」</b></li>
+  <li>弹出蓝色窗口后，粘贴下面这条命令，按回车：</li>
+</ol>
+<div class="cmd">wsl --install -d Ubuntu-22.04</div>
+<div class="warn"><b>注意一定要带 <code>-22.04</code>。</b>只写 <code>-d Ubuntu</code> 会装成 24.04，那个版本的软件源里没有本项目的密码库，会部署失败。</div>
+
+<h3><span class="step-num">2</span>等待安装完成后重启电脑</h3>
+<p>安装过程需要下载约几百 MB，耐心等它跑完。看到提示要求重启时，重启电脑。</p>
+
+<div class="warn"><b>如果提示 "wsl --install 失败" 或需要更新内核：</b>先运行 <code>wsl --update</code> 再重试上面的命令。</div>
+
+<h2 id="part2">第二步：首次进入 Ubuntu（设置用户名和密码）</h2>
+
+<h3><span class="step-num">1</span>打开 Ubuntu</h3>
+<p>重启后，按 <code>Win</code> 键输入 <code>ubuntu</code>，点击打开。会弹出一个黑色或紫色的终端窗口。</p>
+
+<h3><span class="step-num">2</span>设置用户名和密码（首次打开才会要求）</h3>
+<ul>
+  <li><b>Enter new UNIX username:</b> 输入一个用户名（建议纯小写英文，比如 <code>student</code>），回车</li>
+  <li><b>New password:</b> 输入密码（<b>屏幕上不会显示任何字符，这是正常的，盲打就行</b>），回车再输一遍</li>
+</ul>
+<div class="ok">看到 <code>用户名@电脑名:~$</code> 这样的提示符，就说明成功了。这个密码后面会用到，请记住它。</div>
+
+<h2 id="part3">第三步：一键部署（复制粘贴就行）</h2>
+
+<h3><span class="step-num">1</span>进入项目目录</h3>
+<p>在 Ubuntu 终端里粘贴这行命令，回车：</p>
+<div class="cmd">cd /mnt/d/projects/cpp-oj-platform</div>
+
+<h3><span class="step-num">2</span>运行一键部署脚本</h3>
+<div class="cmd">chmod +x setup.sh && ./setup.sh</div>
+
+<p>脚本会自动完成下面所有事情（大约 5~15 分钟，取决于网速）：</p>
+<table>
+  <tr><th>步骤</th><th>它在做什么</th><th>你需要做什么</th></tr>
+  <tr><td>1/6 安装依赖</td><td>换清华源，装 g++、cmake、MySQL、Botan2 等</td><td>输入你刚才设的 <b>Ubuntu 密码</b>（盲打），然后等待</td></tr>
+  <tr><td>2/6 同步源码</td><td>把项目复制到 WSL 本地磁盘 <code>~/oj_platform</code></td><td>无</td></tr>
+  <tr><td>3/6 数据库</td><td>启动 MySQL、创建用户、建 4 张表</td><td>可能再输一次密码，等待</td></tr>
+  <tr><td>4/6 更新配置</td><td>写入你的用户名</td><td>无</td></tr>
+  <tr><td>5/6 编译项目</td><td>把 C++ 源码编译成程序</td><td>等待 1~3 分钟</td></tr>
+  <tr><td>6/6 启动服务</td><td>创建管理员并启动</td><td>问 <code>[Y/n]</code> 时直接<b>回车</b></td></tr>
+</table>
+
+<div class="note">
+<b>为什么源码要复制到 <code>~/oj_platform</code> 再编译？</b><br>
+项目在 Windows 的 D 盘，WSL 通过 <code>/mnt/d</code> 访问它。这个挂载点上 CMake 生成的临时可执行文件<b>没有执行权限</b>，会报 <code>Operation not permitted</code>。所以脚本先把源码同步到 WSL 自己的磁盘（ext4）再编译，这是最稳的做法。<br>
+<b>影响</b>：你在 Windows 上改了代码后，需要<b>重新跑一次</b> <code>2-双击部署OJ.bat</code> 才会同步生效（日常使用不需要改代码）。
+</div>
+
+<div class="ok">看到类似 <code>Server starting on 0.0.0.0:8080</code> 的字样，说明<b>启动成功</b>！这个窗口不要关（关了服务就停了）。</div>
+
+<h2 id="part4">第四步：使用系统</h2>
+
+<ol>
+  <li>打开 Windows 里的浏览器（Edge/Chrome 都行），访问：
+    <div class="cmd">http://localhost:8080</div>
+  </li>
+  <li>点击登录页，用管理员账号登录：
+    <table>
+      <tr><th>用户名</th><th>密码</th></tr>
+      <tr><td>admin</td><td>admin123</td></tr>
+    </table>
+  </li>
+  <li>进入管理后台可以添加题目；注册一个新用户（如 test/123456）可以做题、提交代码看判题结果</li>
+</ol>
+
+<h2 id="part5">以后如何再次启动（每次开机后）</h2>
+<p>WSL 重启后 MySQL 和服务都不会自动运行。最省事的做法是双击 <code>3-双击启动OJ服务.bat</code>。</p>
+<p>也可以在 Ubuntu 终端里粘贴这两行：</p>
+<div class="cmd">sudo service mysql start
+cd ~/oj_platform &amp;&amp; ./build/oj_server</div>
+<div class="note">第一行需要输入 Ubuntu 密码（盲打）。看到 Server starting 后，浏览器访问 <code>http://localhost:8080</code>。<b>不需要重新跑 setup.sh</b>。</div>
+
+<h2 id="faq">常见问题</h2>
+
+<p class="faq-q">Q0：在终端里没法复制粘贴怎么办？</p>
+<p>三种办法任选：<br>
+<b>粘贴</b>：在终端窗口里直接按<b>鼠标右键</b>（即可粘贴剪贴板内容）；或按 <code>Ctrl + Shift + V</code>。<br>
+<b>复制</b>：用鼠标选中文字后按 <code>Ctrl + Shift + C</code>，或直接回车复制选中内容（Windows Terminal 默认行为）。<br>
+<b>最省事</b>：直接用项目文件夹里的 <code>1-双击安装WSL.bat</code>、<code>2-双击部署OJ.bat</code>、<code>3-双击启动OJ服务.bat</code>，完全不用打字。</p>
+
+<p class="faq-q">Q0.5：我装错成 Ubuntu 24.04 了，怎么办？</p>
+<p>正常，很多人第一次都会踩这个坑。做法：<br>
+① 双击 <code>0-uninstall-old-Ubuntu.bat</code>，按提示输入大写 <code>YES</code> 删除旧版<br>
+② 双击 <code>1-双击安装WSL.bat</code> 装 Ubuntu 22.04<br>
+③ 双击 <code>2-双击部署OJ.bat</code><br>
+删除 Linux 子系统<b>不会</b>影响你 Windows 上的任何文件。</p>
+
+<p class="faq-q">Q1：输密码的时候屏幕上什么都不显示？</p>
+<p>Linux 的传统就是这样，<b>密码不会显示星号</b>，直接盲打完按回车即可。</p>
+
+<p class="faq-q">Q2：apt 安装特别慢或者失败？</p>
+<p>使用<b>双击方案</b>（<code>2-双击部署OJ.bat</code>）的话，脚本会在装包前自动调用 <code>fix_sources.sh</code> 把默认国际源换成<b>清华源</b>，无需手动操作。</p>
+<p>如果你是手动跑 <code>./setup.sh</code>，需要先换源再装包，把下面这条命令完整粘贴到 Ubuntu 终端回车：</p>
+<div class="cmd">bash fix_sources.sh</div>
+<p>再重新跑 <code>./setup.sh</code>。如果清华源也连不上，可以改用阿里源（编辑 <code>fix_sources.sh</code> 把 <code>PRIMARY="mirrors.tuna.tsinghua.edu.cn"</code> 改成 <code>mirrors.aliyun.com</code>）。</p>
+
+<p class="faq-q">Q3：脚本中途报红色 [ERROR] 停了？</p>
+<p>把终端里最后 20 行左右截图发给 AI 助手，会告诉你怎么修。常见原因：网络断、密码输错（重新跑一次脚本即可，已完成的步骤会自动跳过或快速重做）。</p>
+
+<p class="faq-q">Q4：浏览器打不开 localhost:8080？</p>
+<p>① 确认 Ubuntu 终端窗口还开着且显示 Server starting；<br>
+② 试试在 Ubuntu 里另开一个终端窗口跑 <code>curl http://localhost:8080</code>，有 HTML 内容返回说明服务正常，是浏览器问题（换 Edge 试试）；没返回则服务没起来，看终端报错。</p>
+
+<p class="faq-q">Q5：想停止服务？</p>
+<p>在运行服务的终端窗口按 <code>Ctrl + C</code>。</p>
+
+<p class="faq-q">Q6：WSL 里能直接访问 D 盘文件吗？</p>
+<p>能。<code>/mnt/d/...</code> 就对应 <code>D:\...</code>，项目文件在 Windows 和 WSL 里看到的是同一份。</p>
+
+<p class="faq-q">Q7：编译警告或 gtest 相关测试没跑？</p>
+<p>不影响使用。测试是可选项，服务能启动、能做题就说明部署成功了。</p>
+
+<p class="faq-q">Q8：部署时报 <code>E: Unable to locate package libbotan-2-dev</code>？</p>
+<p><b>99% 是因为你用的是 Ubuntu 24.04</b>——那个版本的软件源里已经没有 Botan 2.x 了。请按 <a href="#faq">Q0.5</a> 换成 Ubuntu 22.04。<br>
+如果你确认自己装的是 22.04 还报这个错，那是国际源 <code>archive.ubuntu.com</code> 连不上：<br>
+① 编辑 <code>fix_sources.sh</code>，把 <code>PRIMARY="mirrors.tuna.tsinghua.edu.cn"</code> 改成 <code>mirrors.aliyun.com</code>（阿里源）<br>
+② 重新跑 <code>2-双击部署OJ.bat</code></p>
+
+<p class="faq-q">Q9：报 <code>CMake Error ... Operation not permitted</code>？</p>
+<p>已解决。脚本现在会把源码同步到 WSL 本地磁盘 <code>~/oj_platform</code> 再编译，不再在 <code>/mnt/d</code> 上构建。如果你是自己手动跑的老版本脚本，请重新双击 <code>2-双击部署OJ.bat</code>。</p>
+
+<p class="faq-q">Q10：我在 Windows 上改了代码，怎么让改动生效？</p>
+<p>重新双击一次 <code>2-双击部署OJ.bat</code>，它会把最新的源码同步到 <code>~/oj_platform</code> 并重新编译。日常使用（只做题、只加题目）不需要这一步。</p>
+
+<div class="ok" style="margin-top:32px">
+<b>验收清单（都通过 = 项目完整跑起来了）</b><br>
+✅ 浏览器打开 http://localhost:8080 看到首页<br>
+✅ admin/admin123 能登录，管理后台能添加题目（填标题/难度/描述/代码模板/测试用例）<br>
+✅ 注册新用户 test/123456 能登录<br>
+✅ 做题页写代码点「运行代码」，能返回 AC / WA / CE 等判题结果<br>
+✅ 管理后台能删除题目
+</div>
+
+</body>
+</html>

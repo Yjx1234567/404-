@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提交记录 - CodeOJ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">CodeOJ</span>
+                </a>
+                <nav class="app-nav" aria-label="主要导航">
+                    <a href="problem_list.html" class="nav-link">题库</a>
+                    <a href="submissions.html" class="nav-link" aria-current="page">提交记录</a>
+                    <a href="leaderboard.html" class="nav-link">排行榜</a>
+                    <a href="profile.html" class="nav-link">个人中心</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <span id="userInfo" class="user-info"></span>
+                <a href="admin.html" id="adminLink" class="admin-link hidden">管理后台</a>
+                <button id="logoutBtn" class="btn-logout" type="button">退出</button>
+            </div>
+        </header>
+
+        <main id="mainContent" tabindex="-1" class="main-content">
+            <div class="page-heading">
+                <p class="eyebrow">SUBMISSIONS</p>
+                <h1>提交记录</h1>
+                <p class="page-description">回顾每次提交，查看评测结果与测试用例详情。</p>
+            </div>
+            <div class="list-toolbar">
+                <div class="filter-bar">
+                    <label class="sr-only" for="problemFilter">按题目 ID 筛选，留空显示全部</label>
+                    <input type="text" id="problemFilter" class="search-input" inputmode="numeric" placeholder="输入题目 ID，留空显示全部">
+                    <button id="filterBtn" class="btn-back" type="button">筛选</button>
+                    <button id="clearFilterBtn" class="btn-back" type="button">清除</button>
+                </div>
+            </div>
+
+            <div id="submissionList" class="submission-list">
+                <div class="loading">加载中...</div>
+            </div>
+
+            <div id="pagination" class="pagination"></div>
+
+            <section id="detailPanel" class="result-panel submission-detail hidden" aria-label="提交详情">
+                <div class="detail-panel-header">
+                    <div class="result-header">
+                        <span id="detailStatus" class="result-status"></span>
+                        <span id="detailMessage"></span>
+                    </div>
+                    <button id="detailCloseBtn" class="btn-logout" type="button">关闭</button>
+                </div>
+                <div id="detailMeta" class="detail-meta"></div>
+                <div id="detailError" class="detail-error"></div>
+                <div id="detailCases" class="result-details"></div>
+                <div class="detail-code-section">
+                    <h3>提交的代码</h3>
+                    <pre id="detailCode" class="detail-code"></pre>
+                </div>
+                <div id="detailSolutionWrap" class="detail-code-section reference-solution hidden">
+                    <h3>参考答案（做错了可以参考）</h3>
+                    <pre id="detailSolution" class="detail-code"></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/submissions.js"></script>
+</body>
+</html>

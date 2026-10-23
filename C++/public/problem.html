@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>题目详情 - CodeOJ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Ace 编辑器：本地 vendor 副本（离线可用），加载失败时自动降级为 textarea -->
+    <script src="vendor/ace/ace.min.js"
+            onerror="window.__aceFailed = true"></script>
+    <script src="vendor/ace/mode-c_cpp.min.js"></script>
+    <script src="vendor/ace/theme-monokai.min.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">CodeOJ</span>
+                </a>
+                <nav class="app-nav" aria-label="主要导航">
+                    <a href="problem_list.html" class="nav-link" aria-current="page">题库</a>
+                    <a href="submissions.html" class="nav-link">提交记录</a>
+                    <a href="leaderboard.html" class="nav-link">排行榜</a>
+                    <a href="profile.html" class="nav-link">个人中心</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <span id="userInfo" class="user-info"></span>
+                <a href="admin.html" id="adminLink" class="admin-link hidden">管理后台</a>
+                <button id="logoutBtn" class="btn-logout" type="button">退出</button>
+            </div>
+        </header>
+        
+        <main id="mainContent" tabindex="-1" class="main-content split-layout">
+            <section class="problem-panel" aria-labelledby="problemTitle">
+                <div class="workspace-heading">
+                    <p class="eyebrow">PROBLEM</p>
+                    <a href="problem_list.html" class="back-link page-back">返回题库</a>
+                </div>
+                <div class="problem-header">
+                    <h1 id="problemTitle">加载中...</h1>
+                    <span id="problemDifficulty" class="difficulty-tag"></span>
+                </div>
+                <div id="problemContent" class="problem-content"></div>
+                <div class="testcase-section">
+                    <h2>测试用例</h2>
+                    <div id="testCases" class="testcase-list"></div>
+                </div>
+            </section>
+            
+            <section class="editor-panel" aria-label="代码编辑与评测">
+                <div class="editor-toolbar">
+                    <span class="toolbar-title">C++ 编辑器</span>
+                    <button id="runBtn" class="btn-run" type="button" aria-busy="false">运行代码</button>
+                </div>
+                <div id="editor" class="code-editor" role="region" aria-label="C++ 代码编辑器"></div>
+                <div id="resultPanel" class="result-panel hidden" aria-live="polite" aria-atomic="false" aria-busy="false">
+                    <div class="result-header">
+                        <span id="resultStatus" class="result-status"></span>
+                        <span id="resultMessage"></span>
+                    </div>
+                    <div id="resultDetails" class="result-details"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/problem_detail.js"></script>
+</body>
+</html>
